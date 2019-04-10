@@ -1,5 +1,4 @@
 module Gamefic
-
   # Constants for ANSI codes, plus ExtraCodes for custom formatting.
   module Tty::Text::Ansi
     module Code
@@ -42,12 +41,11 @@ module Gamefic
         IGNORED = :ignored
         LINE = :line
       end
-    end  
+    end
     def self.graphics_mode(*settings)
-      ansi = settings.flatten.that_are(Fixnum)
+      ansi = settings.flatten.that_are(Integer)
       return '' if ansi.length == 0
       "\e[#{ansi.join(';')}m"
     end
   end
-
 end

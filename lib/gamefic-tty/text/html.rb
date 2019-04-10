@@ -19,7 +19,7 @@ module Gamefic
         re = Regexp.new("&(?!(#{piped}))")
         text.gsub(re, '&amp;\1')
       end
-      
+
       # Encode a String with HTML entities
       #
       # @param text [String]
@@ -31,7 +31,7 @@ module Gamefic
         }
         encoded
       end
-      
+
       # Decode a String's HTML entities
       #
       # @param text [String]
@@ -42,7 +42,7 @@ module Gamefic
         }
         text
       end
-      
+
       # Parse a String into an XML document
       #
       # @param code [String]
@@ -64,5 +64,4 @@ module Gamefic
       end
     end
   end
-
 end
