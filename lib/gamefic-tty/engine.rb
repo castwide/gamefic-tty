@@ -4,7 +4,7 @@ module Gamefic
       def initialize(plot: Gamefic::Plot.new, user: Gamefic::Tty::User.new)
         @plot = plot
         @user = user
-        @character = plot.get_player_character
+        @character = @plot.get_player_character
         @plot.introduce @character
       end
 
@@ -13,15 +13,15 @@ module Gamefic
       end
 
       def self.run
-        Engine.new.run
+        new.run
       end
 
       private
 
       def turn
-        plot.ready
+        @plot.ready
         send_and_receive
-        plot.update
+        @plot.update
       end
 
       def send_and_receive
