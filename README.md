@@ -1,8 +1,16 @@
-# Gamefic::Tty
+# Gamefic TTY
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gamefic/tty`. To experiment with that code, run `bin/console` for an interactive prompt.
+A Gamefic engine for games that run on IO.
 
-TODO: Delete this and the text above, and describe your gem
+**Features:**
+
+* Works with the `gamefic-standard` library
+* Converts Gamefic's default HTML output to ANSI text
+
+**Common uses:**
+
+* Run a game on the command line.
+* Attach IO streams to run the game over other processes.
 
 ## Installation
 
@@ -22,17 +30,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The easiest way to get started with Gamefic TTY is with the Gamefic SDK. See the [SDK README](https://github.com/castwide/gamefic-sdk) for more information.
 
-## Development
+An example script that runs a game on the command line:
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+require 'gamefic-tty'
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Gamefic.script do
+  introduction do |actor|
+    actor.tell "Hello, world!"
+  end
+end
+
+Gamefic::Tty::Engine.run
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/gamefic-tty.
+Bug reports and pull requests are welcome on GitHub at https://github.com/castwide/gamefic-tty.
 
 ## License
 
