@@ -1,4 +1,3 @@
-require 'gamefic/user'
 require 'json'
 
 module Gamefic
