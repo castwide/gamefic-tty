@@ -28,13 +28,14 @@ module Gamefic
           list += "</ol>"
           output += list
         end
-        "#{Gamefic::Tty::Text::Html::Conversions.html_to_ansi output}#{state[:prompt]} "
+        Gamefic::Tty::Text::Html::Conversions.html_to_ansi output
       end
 
       # Get input from the user.
       #
       # @return [String, nil]
-      def query
+      def query prompt = '> '
+        print prompt
         @input.gets
       end
 

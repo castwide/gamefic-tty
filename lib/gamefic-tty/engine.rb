@@ -10,6 +10,7 @@ module Gamefic
 
       def run
         turn until @character.concluded?
+        @user.update @character.state
       end
 
       def self.run
@@ -27,7 +28,7 @@ module Gamefic
       def send_and_receive
         @user.update @character.state
         return if @character.concluded?
-        input = @user.query
+        input = @user.query("#{@character.state[:prompt]} ")
         @character.queue.push input unless input.nil?
       end
     end
