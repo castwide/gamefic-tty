@@ -3,6 +3,9 @@ require 'json'
 module Gamefic
   module Tty
     class User
+      attr_reader :input
+      attr_reader :output
+
       # @param input [IO] The stream that receives input
       # @param output [IO] The stream that sends output
       def initialize input: STDIN, output: STDOUT
@@ -35,7 +38,7 @@ module Gamefic
       #
       # @return [String, nil]
       def query prompt = '> '
-        print prompt
+        @output.print prompt
         @input.gets
       end
 

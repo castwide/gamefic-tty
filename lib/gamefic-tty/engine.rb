@@ -1,6 +1,10 @@
 module Gamefic
   module Tty
     class Engine
+      attr_reader :plot
+      attr_reader :user
+      attr_reader :character
+
       def initialize(plot: Gamefic::Plot.new, user: Gamefic::Tty::User.new)
         @plot = plot
         @user = user
@@ -17,13 +21,13 @@ module Gamefic
         new.run
       end
 
-      private
-
       def turn
         @plot.ready
         send_and_receive
         @plot.update
       end
+
+      private
 
       def send_and_receive
         @user.update @character.state
