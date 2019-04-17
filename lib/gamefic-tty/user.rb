@@ -1,4 +1,5 @@
 require 'json'
+require 'html_to_ansi'
 
 module Gamefic
   module Tty
@@ -31,7 +32,7 @@ module Gamefic
           list += "</ol>"
           output += list
         end
-        Gamefic::Tty::Text::Html::Conversions.html_to_ansi output
+        HtmlToAnsi.convert output
       end
 
       # Get input from the user.

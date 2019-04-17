@@ -33,13 +33,15 @@ Gem::Specification.new do |spec|
   #   `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   # end
   spec.files = Dir['lib/**/*.rb']
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  # spec.bindir        = "exe"
+  # spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'gamefic', '~> 2.0'
+  spec.add_runtime_dependency 'html_to_ansi', '~> 0.1.0'
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "simplecov", "~> 0.14"
 end
