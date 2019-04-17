@@ -17,8 +17,10 @@ module Gamefic
         @user.update @character.state
       end
 
-      def self.run
-        new.run
+      def self.run **args
+        engine = new(**args)
+        engine.run
+        engine
       end
 
       def turn

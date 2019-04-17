@@ -26,6 +26,12 @@ RSpec.describe Gamefic::Tty::Engine do
     expect(engine.character).to be_concluded
   end
 
+  it "runs from the singleton method" do
+    engine = Gamefic::Tty::Engine.run(plot: plot, user: quitter)
+    expect(engine.character).to be_concluded
+  end
+
+
   it 'updates after conclusion' do
     user = Gamefic::Tty::User.new(input: StringIO.new('quit'), output: StringIO.new)
     engine = Gamefic::Tty::Engine.new(plot: plot, user: user)
