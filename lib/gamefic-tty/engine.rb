@@ -10,11 +10,12 @@ module Gamefic
         @user = user
         @character = @plot.get_player_character
         @plot.introduce @character
+        @plot.ready
       end
 
       def run
         turn until @character.concluded?
-        @user.update @character.state
+        @user.update @character.output
       end
 
       def self.run **args
@@ -24,9 +25,9 @@ module Gamefic
       end
 
       def turn
-        @plot.ready
         send_and_receive
         @plot.update
+        @plot.ready
       end
 
       private

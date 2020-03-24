@@ -5,7 +5,7 @@ RSpec.describe Gamefic::Tty::User do
     output = StringIO.new
     user = Gamefic::Tty::User.new(output: output)
     user.update({
-      output: '<p>Test</p>'
+      messages: '<p>Test</p>'
     })
     expect(output.string).to include('Test')
   end
