@@ -23,7 +23,7 @@ module Gamefic
       end
 
       def state_to_text state
-        output = state[:output].to_s
+        output = state[:messages].to_s
         unless state[:options].nil?
           list = '<ol class="multiple_choice">'
           state[:options].each { |o|
