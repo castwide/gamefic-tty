@@ -33,9 +33,14 @@ module Gamefic
       private
 
       def send_and_receive
-        @user.update @character.state
+        @user.update @character.output
+        until @character.queue.empty? || @character.concluded?
+          @plot.update
+          @plot.ready
+          @user.update @character.output
+        end
         return if @character.concluded?
-        input = @user.query("#{@character.state[:prompt]} ")
+        input = @user.query("#{@character.output[:prompt]} ")
         @character.queue.push input unless input.nil?
       end
     end
