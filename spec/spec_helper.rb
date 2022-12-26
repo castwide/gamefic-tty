@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'gamefic'
+require 'stringio'
 require 'simplecov'
 
 RSpec.configure do |config|

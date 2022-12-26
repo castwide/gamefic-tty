@@ -1,5 +1,3 @@
-require 'stringio'
-
 RSpec.describe Gamefic::Tty::User do
   it 'writes output on update' do
     output = StringIO.new
