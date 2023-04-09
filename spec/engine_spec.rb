@@ -1,7 +1,6 @@
 RSpec.describe Gamefic::Tty::Engine do
   let(:plot) {
-    plot = Gamefic::Plot.new
-    plot.stage do
+    Gamefic.script do
       respond :think do |actor|
         actor.tell 'Player thinks'
         actor.queue.push 'quit'
@@ -9,34 +8,34 @@ RSpec.describe Gamefic::Tty::Engine do
 
       respond :quit do |actor|
         actor.tell 'Player quit'
-        actor.conclude default_conclusion
+        actor.conclude :default_conclusion
       end
     end
-    plot
+    Gamefic::Plot.new
   }
 
   it 'completes a turn' do
     user = Gamefic::Tty::User.new(input: StringIO.new('quit'), output: StringIO.new)
     engine = Gamefic::Tty::Engine.new(plot: plot, user: user)
     engine.turn
-    expect(engine.character).to be_concluded
+    expect(engine.character).to be_concluding
   end
 
   it 'runs until concluded' do
     user = Gamefic::Tty::User.new(input: StringIO.new('quit'), output: StringIO.new)
     engine = Gamefic::Tty::Engine.new(plot: plot, user: user)
     engine.run
-    expect(engine.character).to be_concluded
+    expect(engine.character).to be_concluding
   end
 
   it 'runs from the singleton method' do
     user = Gamefic::Tty::User.new(input: StringIO.new('quit'), output: StringIO.new)
     engine = Gamefic::Tty::Engine.run(plot: plot, user: user)
-    expect(engine.character).to be_concluded
+    expect(engine.character).to be_concluding
   end
 
   it 'handles multiple commands in queue' do
-    user = Gamefic::Tty::User.new(input: StringIO.new("think"), output: StringIO.new)
+    user = Gamefic::Tty::User.new(input: StringIO.new("think\nquit"), output: StringIO.new)
     engine = Gamefic::Tty::Engine.new(plot: plot, user: user)
     engine.run
     expect(user.output.string).to include('Player thinks')
