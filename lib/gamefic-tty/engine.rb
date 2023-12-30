@@ -17,8 +17,7 @@ module Gamefic
       def initialize(plot: Gamefic::Plot.new, user: Gamefic::Tty::User.new)
         @plot = plot
         @user = user
-        @character = @plot.make_player_character
-        @plot.introduce @character
+        @character = @plot.introduce
         @plot.ready
       end
 
