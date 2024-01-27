@@ -3,8 +3,13 @@ require 'html_to_ansi'
 
 module Gamefic
   module Tty
+    # An interface for passing IO between an engine and a client.
+    #
     class User
+      # @return [IO]
       attr_reader :input
+
+      # @return [IO]
       attr_reader :output
 
       # @param input [IO] The stream that receives input

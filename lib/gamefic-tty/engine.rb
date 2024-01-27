@@ -1,29 +1,46 @@
 module Gamefic
   module Tty
+    # A simple engine for running turn-based, single-character Gamefic plots.
+    #
     class Engine
+      # @return [Plot]
       attr_reader :plot
+
+      # @return [User]
       attr_reader :user
+
+      # @return [Character]
       attr_reader :character
 
+      # @param plot [Plot]
+      # @param user [User]
       def initialize(plot: Gamefic::Plot.new, user: Gamefic::Tty::User.new)
         @plot = plot
         @user = user
-        @character = @plot.get_player_character
-        @plot.introduce @character
+        @character = @plot.introduce
         @plot.ready
       end
 
+      # Run the plot to its conclusion.
+      #
       def run
-        turn until @character.concluded?
+        turn until @plot.concluding?
         @user.update @character.output
       end
 
-      def self.run **args
-        engine = new(**args)
+      # Create an engine and run the plot.
+      #
+      # @param plot [Plot]
+      # @param user [User]
+      # @return [Engine]
+      def self.run(plot: Gamefic::Plot.new, user: Gamefic::Tty::User.new)
+        engine = new(plot: plot, user: user)
         engine.run
         engine
       end
 
+      # Run a single turn.
+      #
       def turn
         send_and_receive
         @plot.update
@@ -34,14 +51,9 @@ module Gamefic
 
       def send_and_receive
         @user.update @character.output
-        until @character.queue.empty? || @character.concluded?
-          @plot.update
-          @plot.ready
-          @user.update @character.output
-        end
-        return if @character.concluded?
-        input = @user.query("#{@character.output[:prompt]} ")
-        @character.queue.push input unless input.nil?
+        return unless @character.queue.empty?
+
+        @character.queue.push @user.query("#{@character.output[:prompt]} ")
       end
     end
   end
