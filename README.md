@@ -37,13 +37,13 @@ An example script that runs a game on the command line:
 ```ruby
 require 'gamefic-tty'
 
-Gamefic.script do
+class Example < Gamefic::Plot
   introduction do |actor|
     actor.tell "Hello, world!"
   end
 end
 
-Gamefic::Tty::Engine.run
+Gamefic::Tty::Engine.run(plot: Example.new)
 ```
 
 ## Contributing

@@ -1,6 +1,6 @@
 RSpec.describe Gamefic::Tty::Engine do
   let(:plot) {
-    Gamefic.script do
+    Gamefic::Plot.script do
       respond :think do |actor|
         actor.tell 'Player thinks'
         actor.queue.push 'quit'
