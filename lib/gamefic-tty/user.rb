@@ -21,7 +21,7 @@ module Gamefic
 
       # Update the user with a hash of data representing the current game state.
       #
-      # @param data [Hash]
+      # @param state [Hash]
       # @return [void]
       def update state
         @output.write state_to_text(state)
