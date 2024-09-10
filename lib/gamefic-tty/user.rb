@@ -29,7 +29,7 @@ module Gamefic
 
       def state_to_text state
         output = state[:messages].to_s
-        unless state[:options].nil?
+        unless state[:options].nil? || state[:options].empty?
           list = '<ol class="multiple_choice">'
           state[:options].each { |o|
             list += "<li><a href=\"#\" rel=\"gamefic\" data-command=\"#{o}\">#{o}</a></li>"

@@ -1,3 +1,6 @@
+## 3.0.1 - September 10, 2024
+- Skip empty options in output
+
 ## 3.0.0 - January 27, 2024
 - Updates for Gamefic 3.0
 
