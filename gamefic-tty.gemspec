@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   # spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'gamefic', '~> 3.0'
+  spec.add_runtime_dependency 'gamefic', '~> 4.0'
   spec.add_runtime_dependency 'html_to_ansi', '~> 0.2.0'
 
   spec.add_development_dependency 'bundler', '~> 2.0'

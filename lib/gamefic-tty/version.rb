@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Gamefic
   module Tty
-    VERSION = '3.0.1'.freeze
+    VERSION = '4.0.0'
   end
 end

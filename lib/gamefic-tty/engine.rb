@@ -12,20 +12,24 @@ module Gamefic
       # @return [Character]
       attr_reader :character
 
+      # @return [Narrator]
+      attr_reader :narrator
+
       # @param plot [Plot]
       # @param user [User]
       def initialize(plot: Gamefic::Plot.new, user: Gamefic::Tty::User.new)
         @plot = plot
         @user = user
         @character = @plot.introduce
-        @plot.ready
+        @narrator = Gamefic::Narrator.new(plot)
+        narrator.start
       end
 
       # Run the plot to its conclusion.
       #
       def run
-        turn until @plot.concluding?
-        @user.update @character.output
+        turn until narrator.concluding?
+        user.update character.output
       end
 
       # Create an engine and run the plot.
@@ -43,17 +47,17 @@ module Gamefic
       #
       def turn
         send_and_receive
-        @plot.update
-        @plot.ready
+        narrator.finish
+        narrator.start
       end
 
       private
 
       def send_and_receive
-        @user.update @character.output
-        return unless @character.queue.empty?
+        user.update character.output
+        return unless character.queue.empty?
 
-        @character.queue.push @user.query("#{@character.output[:prompt]} ")
+        character.queue.push user.query("#{character.output[:prompt]} ")
       end
     end
   end
