@@ -1,6 +1,6 @@
 RSpec.describe Gamefic::Tty::Engine do
   let(:plot) {
-    Gamefic::Plot.script do
+    klass = Class.new(Gamefic::Plot) do
       respond :think do |actor|
         actor.tell 'Player thinks'
         actor.queue.push 'quit'
@@ -8,10 +8,10 @@ RSpec.describe Gamefic::Tty::Engine do
 
       respond :quit do |actor|
         actor.tell 'Player quit'
-        actor.conclude :default_conclusion
+        actor.cue default_conclusion
       end
     end
-    Gamefic::Plot.new
+    klass.new
   }
 
   it 'completes a turn' do
